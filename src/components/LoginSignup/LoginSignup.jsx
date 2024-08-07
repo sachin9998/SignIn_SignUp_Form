@@ -8,20 +8,29 @@ import user_icon from "../../assets/person.png";
 const LoginSignup = () => {
   const [action, setAction] = useState("Sign Up");
 
+  const handleSignup = () => {
+    setAction("Sign Up");
+  };
+  const handleLogin = () => {
+    setAction("Login");
+  };
+
   return (
     <div className="container">
       {/* Header */}
       <div className="header">
-        <div className="text">Signup</div>
+        <div className="text">{action}</div>
         <div className="underline"></div>
       </div>
 
       {/* Inputs */}
       <div className="inputs">
-        <div className="input">
-          <img src={user_icon} alt="" />
-          <input type="text" placeholder="Name" />
-        </div>
+        {action === "Sign Up" && (
+          <div className="input">
+            <img src={user_icon} alt="" />
+            <input type="text" placeholder="Name" />
+          </div>
+        )}
 
         <div className="input">
           <img src={email_icon} alt="" />
@@ -34,13 +43,25 @@ const LoginSignup = () => {
         </div>
       </div>
 
-      <div className="forget-password">
-        Lost Password? <span>Click Here</span>
-      </div>
+      {action === "Login" && (
+        <div className="forget-password">
+          Lost Password? <span>Click Here</span>
+        </div>
+      )}
 
       <div className="submit-container">
-        <div className="submit">Sign Up</div>
-        <div className="submit">Login</div>
+        <div
+          onClick={handleSignup}
+          className={action === "Login" ? "submit gray" : "submit"}
+        >
+          Sign Up
+        </div>
+        <div
+          onClick={handleLogin}
+          className={action === "Sign Up" ? "submit gray" : "submit"}
+        >
+          Login
+        </div>
       </div>
     </div>
   );
